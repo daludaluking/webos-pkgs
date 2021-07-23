@@ -125,3 +125,26 @@ class: lead
 
 ![](gstreamer-pipeline-2.png)
 
+---
+
+## Bus for communication
+
+<br>
+
+![](gstreamer-bus.png)
+
+---
+
+## Pipeline Example 1
+
+<br>
+
+![](gstreamer-pipeline-ex1.png)
+
+---
+
+## Pipeline Example 2
+
+<br>
+
+![](gstreamer-pipeline-ex2.png)
