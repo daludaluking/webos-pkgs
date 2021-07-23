@@ -11,6 +11,9 @@ h1 {
 h3 {
   line-height: 1.2
 }
+section.lead h1 {
+  text-align: center;
+}
 </style>
 
 <!--
@@ -18,7 +21,8 @@ theme: default
 class: lead
 -->
 
-## GStreamer & QTIQMMFSrc Element Overview
+<!-- paginate: true -->
+# GStreamer & QTIQMMFSrc Element Overview
 
 ---
 
@@ -31,7 +35,7 @@ class: lead
 ### - 20년 이상된 opensource project
 
 ---
- 
+
 ## Feature
 
 <br>
@@ -114,7 +118,6 @@ class: lead
 ---
 
 ## Pipeline
-
 
 ### - A top-level bin
 ### - Communication을 위해 bus를 제공
