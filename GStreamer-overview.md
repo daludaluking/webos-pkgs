@@ -14,6 +14,13 @@ h3 {
 section.lead h1 {
   text-align: center;
 }
+section.lead h2 {
+  text-align: center;
+}
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
 </style>
 
 <!--
@@ -51,7 +58,7 @@ class: lead
 
 <br>
 
-![](gstreamer-overview.png)
+![center](gstreamer-overview.png)
 
 ---
 
@@ -59,7 +66,7 @@ class: lead
 
 <br>
 
-![](gstreamer-pipeline.png)
+![center](gstreamer-pipeline.png)
 
 ---
 
@@ -73,7 +80,7 @@ class: lead
 
 <br>
 
-![](gstreamer-elements.png)
+![center](gstreamer-elements.png)
 
 ---
 
@@ -102,7 +109,7 @@ class: lead
 
 <br>
 
-![](gstreamer-pads-2.png)
+![center](gstreamer-pads-2.png)
 
 ---
 
@@ -113,7 +120,7 @@ class: lead
 
 <br>
 
-![](gstreamer-bin.png)
+![center](gstreamer-bin.png)
 
 ---
 
@@ -126,7 +133,7 @@ class: lead
 
 <br>
 
-![](gstreamer-pipeline-2.png)
+![center](gstreamer-pipeline-2.png)
 
 ---
 
@@ -134,7 +141,7 @@ class: lead
 
 <br>
 
-![](gstreamer-bus.png)
+![center](gstreamer-bus.png)
 
 ---
 
@@ -142,7 +149,7 @@ class: lead
 
 <br>
 
-![](gstreamer-pipeline-ex1.png)
+![center](gstreamer-pipeline-ex1.png)
 
 ---
 
@@ -150,4 +157,76 @@ class: lead
 
 <br>
 
-![](gstreamer-pipeline-ex2.png)
+![center](gstreamer-pipeline-ex2.png)
+
+---
+
+# QTIQMMFSrc Element
+
+---
+
+## QTIQMMFSrc 란?
+
+### - GST SRC plugin (qtiqmmfsrc) 
+
+![center](gstreamer-qti-camera.png)
+
+---
+
+## Feature
+
+### - qtiqmmfsrc는 AVC/HEVC bitstreames 및 YUV streams을 제공
+### - qtiqmmfsrc는 QMMF server의 client, QMMF server는 deamon
+### - QMMF server는 binder RPC 기반의 camera/recorder use cases를 구현한 deamon
+### - QMMF-SDK interacts with HAL3 and further HAL3 interacts with camera backend (Camx)
+
+---
+## Video encoder usecase
+
+![center](gstreamer-qti-camera-video.png)
+
+---
+
+## qtiqmmfsrc
+
+![center](gstreamer-qtiqmmfsrc-el.png)
+
+### - To capture video frame via the QMMF service
+### - A wrapper on top of the QMMF Recorder Client
+### - 2 pads for video and image streams.
+### - Pads will push the buffer to its linked sink pad from the next plugin.
+
+---
+
+## Problem
+
+### - qtiqmmfsrc는 QMMF *Recorder* client
+### - QCS605 QMMF와 qtiqmmfsrc (based QCS610) 의 호환성 문제
+### - qtiqmmfsrc는 Preview를 위해 GBM을 사용.
+### - 현재 webos 버전에 QCT LE porting이 완전하지 않음.
+
+---
+
+## Modified qtiqmmfsrc (Cont)
+
+![center](gstreamer-qtiqmmfsrc-with-src.png)
+
+### - Add src pad for preview data
+### - image_%u : for capture a single image buffer
+### - video_%u : for streaming video data
+
+--- 
+
+## Modified qtiqmmfsrc
+
+![width:340px center](gstreamer-qtiqmmfsrc-with-camera-client.png)
+
+---
+
+## Reference
+
+### 1. [GStreamer Tutorials : https://gstreamer.freedesktop.org/documentation/tutorials/basic/index.html?gi-language=c](https://gstreamer.freedesktop.org/documentation/tutorials/basic/index.html?gi-language=c)
+
+### 2. [GStreamer Writer's Guide : https://gstreamer.freedesktop.org/documentation/plugin-development/index.html?gi-language=c](https://gstreamer.freedesktop.org/documentation/plugin-development/index.html?gi-language=c)
+
+### 3. QCS610/QCS410 Linux Platform Development Kit : 80-pl631-100_m_qcs610_qcs410_linux_platform_development_kit_software_reference_manual.pdf
